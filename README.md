@@ -88,6 +88,39 @@ My responsibility is to explore the appointment dataset, assess data quality, de
 
 ---
 
+## ✅ Week 6 — Advanced Analytics, Validation & Cross-Track Integration
+
+**Status: Complete**
+
+- **Validated** that previous no-show history holds as an independent risk factor across every distance band (consistent 11–13pp gap)
+- **Quantified compounding risk**: combined distance + lead time risk shows a 57.0% no-show rate vs 25.8% for low-risk patients
+- Built a full **0–3 combined risk score** (lead time + distance + prior no-show history) showing a clean escalation from **21.6% → 63.4%** no-show rate
+- Re-examined booking lead time at finer granularity — risk reaches **71.4%** at 46–60 days
+- Discovered a new **Service Type × Reminder Channel interaction** (Follow-up + Email: 62.1% vs Follow-up + SMS: 49.1%)
+- Added 2 new KPIs (% High-Risk Appointments: 47.0%, Avg. Risk Score: 1.47) and 2 new dashboard visualisations
+- **Delivered validated findings to the Data Science track** with concrete feature engineering suggestions (`high_lead_time_flag`, `chronic_no_show_flag`, appointment-type × reminder-channel interaction term)
+
+  📄 [`docs/advanced_analytics_report.docx`](docs/advanced_analytics_report.docx) · [`docs/week6_project_summary.docx`](docs/week6_project_summary.docx)
+📊 [`dashboard/healthconnect_dashboard_week6.pdf`](dashboard/healthconnect_dashboard_week6.pdf)
+
+---
+
+## 📈 KPIs & Key Findings
+
+| KPI | Value | Business Question |
+|---|---|---|
+| Overall No-Show Rate | **48.5%** | What is the scale of the attendance problem? |
+| No-Show Rate by Booking Lead Time | **24.8% → 71.4%** (0–7 days → 46–60 days) | Does lead time relate to attendance? |
+| No-Show Rate by Distance Band | **46.5% → 68.1%** | Does distance affect attendance? |
+| Repeat No-Show Rate | **55.4% vs 43.5%** | Does prior history predict future behaviour? |
+| No-Show Rate by Reminder Channel | **45.8% → 51.4%** | Do reminders reduce no-shows? |
+| **No-Show Rate by Combined Risk Score (0–3)** | **21.6% → 63.4%** | Do risk factors compound? *(Week 6)* |
+| **% High-Risk Appointments (score ≥ 2)** | **47.0%** | How large is the actionable high-risk population? *(Week 6)* |
+| **Average Risk Score** | **1.47** | What's the overall risk pulse-check? *(Week 6)* |
+
+**Strongest finding overall:** the combined risk score — patients with all three risk factors present are roughly **3x** more likely to no-show than patients with none.
+  
+
 ## 🛠️ Tools Used
 
 - **Python** (pandas) — data cleaning, feature engineering, exploratory analysis
@@ -100,13 +133,21 @@ My responsibility is to explore the appointment dataset, assess data quality, de
 
 - [x] **Week 4** — Problem understanding, data quality assessment, KPI proposal
 - [x] **Week 5** — Data cleaning, EDA, KPI calculation, initial dashboard, insights & recommendations
-- [ ] **Week 6+** — Dashboard refinement, further segmentation, continued cross-track collaboration
+- [x] **Week 6** — Advanced analysis, validation, combined risk score, cross-track integration with Data Science
+- [ ] **Week 7** — Testing risk score stability, further validation, continued collaboration
+- [ ] **Week 8** — Final integration & presentation
 
 ---
 
 ## 🤝 Cross-Track Collaboration
 
-Shared with the **Data Science track**: booking lead time, distance to clinic, and previous no-show history are the strongest predictors of no-shows found in this analysis — intended to inform their feature selection for a no-show prediction model.
+**Week 5:** Identified Data Science as a relevant collaboration point — analytical findings to inform their no-show prediction model.
+
+**Week 6 (completed integration):** Delivered three validated findings to the Data Science track, each with a concrete feature engineering suggestion:
+- Lead Time Escalation → `high_lead_time_flag` (booking_lead_days > 30)
+- Prior No-Show History compounding → `chronic_no_show_flag` (previous_no_shows >= 2)
+- Service × Channel interaction → an interaction term between `appointment_type` and `reminder_channel`
+
 
 ---
 
